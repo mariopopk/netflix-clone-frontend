@@ -2,12 +2,34 @@
 
 @font-face {
   font-family: "Netflix-Sans";
-  src: url("./fonts/NetflixSans-Bold.otf") format("opentype"),
-    url("./fonts/NetflixSans-Bold.woff2") format("woff2");
+  src: url("./fonts/NetflixSans-Light.otf") format("opentype"),
+    url("./fonts/NetflixSans-Light.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
 }
+
+@font-face {
+  font-family: "Netflix-Sans";
+  src: url("./fonts/NetflixSans-Medium.otf") format("opentype"),
+    url("./fonts/NetflixSans-Medium.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Netflix-Sans";
+  src: url("./fonts/NetflixSans-Bold.otf") format("opentype"),
+    url("./fonts/NetflixSans-Bold.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body,
 button {
