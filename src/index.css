@@ -27,13 +27,15 @@
   font-weight: 700;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body,
-button {
-  font-family: "Netflix-Sans";
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Netflix-Sans", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
