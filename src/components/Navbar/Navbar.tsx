@@ -1,35 +1,35 @@
-import { Button, Logo } from "library";
-import { UilBell } from "@iconscout/react-unicons";
+import { Button, Logo, Navbar } from "library";
 import ProfileMenu from "./components/ProfileMenu/ProfileMenu";
 import NavigationMenu from "./components/NavigationMenu/NavigationMenu";
 import Search from "./components/Search/Search";
-import { relative } from "path";
 
 export default function NavBar() {
   return (
     <>
-      <div
-        className="d-flex mx-4"
-        style={{ zIndex: 1, position: "relative", height: "4.5rem" }}
-      >
-        <div style={{ maxWidth: "125px", paddingRight: "1rem" }}>
-          <Logo type="full" />
+      <Navbar>
+        <div className="d-flex container justify-content-between ">
+          <div className="d-inline-flex">
+            <div className="d-none d-xl-block">
+              <Button style={{ maxWidth: "125px", marginRight: "1rem" }}>
+                <Logo type="full" />
+              </Button>
+            </div>
+
+            <div className="d-xl-none">
+              <Button style={{ width: "20px" }}>
+                <Logo type="square" />
+              </Button>
+            </div>
+
+            <NavigationMenu />
+          </div>
+
+          <div className="d-inline-flex align-items-center justify-content-end">
+            <Search />
+            <ProfileMenu />
+          </div>
         </div>
-
-        <NavigationMenu />
-
-        <div
-          className="d-flex align-items-center justify-content-end"
-          style={{ width: "100%" }}
-        >
-          <Search />
-          <Button>
-            <UilBell color="white" />
-          </Button>
-
-          <ProfileMenu />
-        </div>
-      </div>
+      </Navbar>
     </>
   );
 }

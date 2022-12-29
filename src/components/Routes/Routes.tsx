@@ -1,8 +1,6 @@
 import Home from "./components/Home/Home";
 
-interface RoutesProps {}
-
-export default function Routes({}: RoutesProps) {
+export default function Routes() {
   return (
     <>
       <Home />

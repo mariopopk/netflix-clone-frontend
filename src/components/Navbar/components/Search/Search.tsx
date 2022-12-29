@@ -1,15 +1,13 @@
 import { FormExpand } from "library";
 import { UilSearch } from "@iconscout/react-unicons";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function Search() {
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
 
   return (
     <>
-      <div>
-        <FormExpand displayLabel={<UilSearch color="white" />} label="Search" />
-      </div>
+      <FormExpand displayLabel={<UilSearch color="white" />} label="Search" />
     </>
   );
 }

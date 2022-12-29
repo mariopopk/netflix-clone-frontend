@@ -2,9 +2,6 @@ import { Button } from "library";
 
 const items = [
   {
-    name: "Home",
-  },
-  {
     name: "TV Shows",
   },
   {
@@ -16,20 +13,29 @@ const items = [
   {
     name: "My List",
   },
-  {
-    name: "Browse By Languages",
-  },
 ];
 
 export default function NavigationMenu() {
   return (
     <>
-      <div className="d-flex">
+      <div className="d-none d-lg-flex">
         {items.map((item) => (
           <Button key={item.name} color="light" fontWeight="normal">
             {item.name}
           </Button>
         ))}
+      </div>
+
+      <div className="d-none d-sm-flex d-lg-none ">
+        <Button color="light" fontWeight="semibold" size="md">
+          Browse
+        </Button>
+      </div>
+
+      <div className="d-flex d-sm-none">
+        <Button color="light" fontWeight="semibold" size="sm">
+          Browse
+        </Button>
       </div>
     </>
   );

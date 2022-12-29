@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: "Netflix-Sans";
-  src: url("./fonts/NetflixSans-Light.otf") format("opentype"),
-    url("./fonts/NetflixSans-Light.woff2") format("woff2");
+  src: url("../fonts/NetflixSans-Light.otf") format("opentype"),
+    url("../fonts/NetflixSans-Light.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 400;
@@ -11,8 +11,8 @@
 
 @font-face {
   font-family: "Netflix-Sans";
-  src: url("./fonts/NetflixSans-Medium.otf") format("opentype"),
-    url("./fonts/NetflixSans-Medium.woff2") format("woff2");
+  src: url("../fonts/NetflixSans-Medium.otf") format("opentype"),
+    url("../fonts/NetflixSans-Medium.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 500;
@@ -20,8 +20,8 @@
 
 @font-face {
   font-family: "Netflix-Sans";
-  src: url("./fonts/NetflixSans-Bold.otf") format("opentype"),
-    url("./fonts/NetflixSans-Bold.woff2") format("woff2");
+  src: url("../fonts/NetflixSans-Bold.otf") format("opentype"),
+    url("../fonts/NetflixSans-Bold.woff2") format("woff2");
   font-display: swap;
   font-style: normal;
   font-weight: 700;
@@ -32,11 +32,27 @@ html {
   height: 100%;
 }
 
-body {
+* {
   font-family: "Netflix-Sans", system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  box-sizing: content-box;
+}
+
+body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #000;
+}
+
+html {
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
 }

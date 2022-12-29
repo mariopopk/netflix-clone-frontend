@@ -41,10 +41,11 @@ export default function ProfileMenu() {
             src="http://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABcmyl274RQm11_SjfAFgApXNOAFjhuSpRzDJNq9AGpX5OzXIax0H9xeGJJ6WmnCIQVgpbRvV_U-VYeZWrAoOz86Wpq2ee3s.png?r=72e"
             alt=""
           />
+
           {isOpen ? (
-            <UilAngleUp color="white" />
+            <UilAngleUp className="d-none d-xl-block" color="white" />
           ) : (
-            <UilAngleDown color="white" />
+            <UilAngleDown className="d-none d-xl-block" color="white" />
           )}
         </Button>
 
