@@ -1,4 +1,4 @@
-import { Button } from "library";
+import { Button } from "@mariopopk/react-lightning";
 
 const items = [
   {

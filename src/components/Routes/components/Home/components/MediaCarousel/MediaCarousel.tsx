@@ -1,20 +1,24 @@
 import { useRef, CSSProperties } from "react";
 import styles from "./MediaCarousel.module.css";
 import cx from "classnames";
-import { AspectRatioBox, useWindowSize } from "library";
+import { AspectRatioBox, useWindowSize } from "@mariopopk/react-lightning";
 import { UilAngleRightB, UilAngleLeftB } from "@iconscout/react-unicons";
 import useSlideMediaCarousel from "./useSlideMediaCarousel";
 
 export interface MediaCarouselProps {
-  items: MediaCarouselItemProps[];
+  items: MediaCarouselItem[];
   inScreenItems?: number;
 }
 
-export interface MediaCarouselItemProps {
+export interface MediaCarouselItem {
   id: string;
   link?: string;
   img: MediaCarouselItemImages;
   style?: CSSProperties;
+}
+
+export interface MediaCarouselItemProps extends MediaCarouselItem {
+  isFocusable: boolean;
 }
 
 interface MediaCarouselItemImages {
@@ -34,7 +38,9 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   };
 
   const currentInScreenItems =
-    width > 992 ? inScreenItems.large : inScreenItems.small;
+    width >= 992 ? inScreenItems.large : inScreenItems.small;
+
+  const screenSize = width >= 992 ? 100 : 90;
 
   const { positionX, move, currentItem } = useSlideMediaCarousel({
     MediaCarouselRef,
@@ -42,7 +48,6 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
     totalItems: items.length,
   });
 
-  console.log(currentItem, items.length - currentInScreenItems);
   return (
     <div className={styles["MediaCarousel"]}>
       <button
@@ -58,18 +63,24 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
         className={styles["MediaCarousel-inner"]}
         ref={MediaCarouselRef}
         style={{
-          transform: width > 768 ? `translate(${positionX}px, 0px)` : "none",
+          transform: width >= 768 ? `translate(${positionX}px, 0px)` : "none",
+          transition: width >= 768 ? `ease-out 0.75s` : "none",
         }}
       >
-        {items.map(({ id, link, img }: MediaCarouselItemProps) => {
+        {items.map(({ id, link, img }: MediaCarouselItem, i: number) => {
+          const isFocusable =
+            i >= currentItem && i < currentItem + currentInScreenItems;
+
+          console.log(isFocusable, i);
           return (
-            <MediaCarouselItem
+            <CarouselItem
+              isFocusable={isFocusable}
               key={id}
               img={img}
               link={link}
               id={id}
               style={{
-                width: `${100 / currentInScreenItems}%`,
+                width: `${screenSize / currentInScreenItems}%`,
               }}
             />
           );
@@ -89,12 +100,13 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   );
 }
 
-function MediaCarouselItem({ img, style }: MediaCarouselItemProps) {
+function CarouselItem({ img, style, isFocusable }: MediaCarouselItemProps) {
+  const tabIndex = isFocusable ? 0 : -1;
   return (
-    <div className={styles["MediaCarousel-item"]} style={style} tabIndex={0}>
-      <div className="d-none d-md-block">
+    <div className={styles["MediaCarousel-item"]} style={style}>
+      <div className="d-none d-md-block" tabIndex={tabIndex}>
         <AspectRatioBox aspectRatio={{ w: 16, h: 9 }}>
-          <div style={{ margin: "0.1rem" }}>
+          <div style={{ margin: "0.2rem" }}>
             <img
               alt=""
               style={{
@@ -108,9 +120,9 @@ function MediaCarouselItem({ img, style }: MediaCarouselItemProps) {
         </AspectRatioBox>
       </div>
 
-      <div className="d-block d-md-none">
-        <AspectRatioBox aspectRatio={{ w: 8, h: 11 }}>
-          <div style={{ margin: "0.2rem" }}>
+      <div className="d-block d-md-none" tabIndex={0}>
+        <AspectRatioBox aspectRatio={{ w: 47, h: 66 }}>
+          <div style={{ padding: "0.2rem", height: "97%" }}>
             <img
               alt=""
               style={{

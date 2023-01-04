@@ -1,4 +1,10 @@
-import { Button, Typography, AspectRatioBox, Jumbotron, Card } from "library";
+import {
+  Button,
+  Typography,
+  AspectRatioBox,
+  Jumbotron,
+  Card,
+} from "@mariopopk/react-lightning";
 import { UilPlay, UilInfoCircle } from "@iconscout/react-unicons";
 import { CSSProperties } from "react";
 
@@ -33,9 +39,11 @@ export function FeaturedMediaHorizontal({ style }: JumbotronProps) {
               verticalAlignment="middle"
               innerWidth="35%"
             >
-              <MediaTitle />
-              <MediaText />
-              <MediaButtonGroup />
+              <div>
+                <MediaTitle />
+                <MediaText />
+                <MediaButtonGroup />
+              </div>
             </Jumbotron>
           </div>
         </Card>
@@ -47,15 +55,15 @@ export function FeaturedMediaHorizontal({ style }: JumbotronProps) {
 export function FeaturedMediaVertical({ style }: JumbotronProps) {
   return (
     <>
-      <div>
-        <AspectRatioBox aspectRatio={{ w: 5, h: 6 }}>
+      <div style={{ margin: "5%", marginTop: "5rem" }}>
+        <AspectRatioBox aspectRatio={{ w: 5, h: 7 }}>
           <Card
             imageBackground={featuredCard.verticalImage}
             style={{
               width: "100%",
               height: "100%",
               display: "flex",
-              borderWidth: "0",
+              border: 0,
             }}
           >
             <div
@@ -65,7 +73,7 @@ export function FeaturedMediaVertical({ style }: JumbotronProps) {
                 flexDirection: "column",
                 alignItems: "center",
                 marginTop: "auto",
-                padding: "1rem 5%",
+                padding: "8% 5%",
               }}
             >
               <MediaTitle />
@@ -82,7 +90,7 @@ export function FeaturedMediaVertical({ style }: JumbotronProps) {
 function MediaTitle() {
   return (
     <img
-      style={{ width: "85%" }}
+      style={{ maxWidth: "80%" }}
       alt={featuredCard.title}
       src={featuredCard.titleImage}
     />
@@ -116,7 +124,7 @@ function MediaButtonGroup() {
       <Button
         style={{ marginRight: "1rem" }}
         backgroundColor="light"
-        size="lg"
+        size="md"
         icon={<UilPlay />}
       >
         Play
@@ -124,7 +132,7 @@ function MediaButtonGroup() {
 
       <Button
         backgroundColor="secondary"
-        size="lg"
+        size="md"
         color="light"
         icon={<UilInfoCircle />}
       >

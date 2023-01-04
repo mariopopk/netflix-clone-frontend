@@ -1,4 +1,4 @@
-import { FormExpand } from "library";
+import { FormExpand } from "@mariopopk/react-lightning";
 import { UilSearch } from "@iconscout/react-unicons";
 // import { useState } from "react";
 

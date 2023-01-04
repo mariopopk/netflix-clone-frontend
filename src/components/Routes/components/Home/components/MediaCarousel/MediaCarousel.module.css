@@ -6,8 +6,8 @@
 
 .MediaCarousel-inner {
   white-space: nowrap;
-  transition: ease-out 0.75s;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
@@ -27,13 +27,24 @@
   z-index: 1;
   top: 0;
   bottom: 0;
-  width: 5%;
+  width: 4%;
   display: flex;
   align-items: center;
   transition: opacity 0.2s;
   border: 0;
   cursor: pointer;
   display: none;
+  justify-content: center;
+}
+
+.MediaCarousel-button > * {
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.MediaCarousel:hover .MediaCarousel-button > *,
+.MediaCarousel .MediaCarousel-button:focus-within > * {
+  opacity: 1;
 }
 
 .MediaCarousel-button.left {
@@ -43,7 +54,6 @@
     rgba(0, 0, 0, 0) 100%
   );
   left: 0;
-  justify-content: flex-start;
 }
 
 .MediaCarousel-button.right {
@@ -53,7 +63,6 @@
     rgba(0, 0, 0, 0) 100%
   );
   right: 0;
-  justify-content: flex-end;
 }
 
 .MediaCarousel-item {
@@ -79,7 +88,8 @@
   }
 
   .MediaCarousel-inner {
-    overflow-x: unset;
+    overflow-x: visible;
+    overflow-y: unset;
   }
 
   .MediaCarousel {

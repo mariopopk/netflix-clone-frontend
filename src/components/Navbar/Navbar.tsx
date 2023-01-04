@@ -1,4 +1,4 @@
-import { Button, Logo, Navbar } from "library";
+import { Button, Logo, Navbar } from "@mariopopk/react-lightning";
 import ProfileMenu from "./components/ProfileMenu/ProfileMenu";
 import NavigationMenu from "./components/NavigationMenu/NavigationMenu";
 import Search from "./components/Search/Search";

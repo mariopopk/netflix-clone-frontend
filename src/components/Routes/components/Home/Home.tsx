@@ -1,4 +1,4 @@
-import { Typography } from "library";
+import { Typography } from "@mariopopk/react-lightning";
 import {
   FeaturedMediaHorizontal,
   FeaturedMediaVertical,
@@ -159,11 +159,9 @@ export default function Home() {
       <div
         style={{
           minHeight: "500px",
-          // position: "relative",
-          // overflow: "hidden",
         }}
       >
-        <div style={{ margin: "0 5%" }}>
+        <div style={{ margin: "0 5%", marginTop: "1.5rem" }}>
           <Typography
             color="light"
             variant="subtitle"
@@ -173,10 +171,31 @@ export default function Home() {
             Documentaries
           </Typography>
         </div>
-        <MediaCarousel
-          items={slides}
-          //  inScreenItems={6}
-        />
+        <MediaCarousel items={slides} />
+
+        <div style={{ margin: "0 5%", marginTop: "1.5rem" }}>
+          <Typography
+            color="light"
+            variant="subtitle"
+            fontWeight="semibold"
+            component="h2"
+          >
+            Documentaries
+          </Typography>
+        </div>
+        <MediaCarousel items={slides} />
+
+        <div style={{ margin: "0 5%", marginTop: "1.5rem" }}>
+          <Typography
+            color="light"
+            variant="subtitle"
+            fontWeight="semibold"
+            component="h2"
+          >
+            Documentaries
+          </Typography>
+        </div>
+        <MediaCarousel items={slides} />
       </div>
     </>
   );
