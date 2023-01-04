@@ -1,0 +1,96 @@
+.MediaCarousel {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.MediaCarousel-inner {
+  white-space: nowrap;
+  transition: ease-out 0.75s;
+  overflow-x: scroll;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.MediaCarousel-inner {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.MediaCarousel-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.MediaCarousel-button {
+  background: transparent;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 5%;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s;
+  border: 0;
+  cursor: pointer;
+  display: none;
+}
+
+.MediaCarousel-button.left {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  left: 0;
+  justify-content: flex-start;
+}
+
+.MediaCarousel-button.right {
+  background: linear-gradient(
+    270deg,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  right: 0;
+  justify-content: flex-end;
+}
+
+.MediaCarousel-item {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.MediaCarousel-item img {
+  border-radius: 0.25rem;
+}
+
+.MediaCarousel-item:first-child {
+  margin-left: 5%;
+}
+
+.MediaCarousel-item:last-child {
+  margin-right: 5%;
+}
+
+@media screen and (min-width: 768px) {
+  .MediaCarousel-button {
+    display: flex;
+  }
+
+  .MediaCarousel-inner {
+    overflow-x: unset;
+  }
+
+  .MediaCarousel {
+    padding: 0 5%;
+  }
+
+  .MediaCarousel-item:first-child {
+    margin-left: 0%;
+  }
+
+  .MediaCarousel-item:last-child {
+    margin-right: 0%;
+  }
+}

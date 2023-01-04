@@ -1,29 +1,147 @@
-import { Typography } from "library";
+import { Carousel, Typography } from "library";
 import {
   FeaturedMediaHorizontal,
   FeaturedMediaVertical,
 } from "./components/FeaturedMedia/FeaturedMedia";
+import MediaCarousel from "./components/MediaCarousel/MediaCarousel";
 
-const carousel1 = [
+const slides = [
   {
-    image:
-      "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    id: "1",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "2",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "3",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "4",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
   },
   {
-    image:
-      "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXDSP0fO1t4u1QQ-VoOo2G7eG1mtiaBYzns9kwznAi91iOWleTFb5eEc7aBrPiI4iUABIzV9TotIrwVUMd9oQ4-qMerkHCF1kmg1WUUG30JN_Bk9QJcjBKH80BubryGAG8M4.jpg?r=061",
+    id: "5",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "6",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
   },
   {
-    image:
-      "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABYXc_Em_eCLOZ1vogowGbqnOp1F4Cpyzgo1tyMDYT_J8ECOEemkdnLETjsL_c2y5nig39opJRPY7f0Uvbrva4ReeS5gs9vXgsbTJ1M8S5H7n5mmuqTDqJSSVEWfZ81CTu2fq.jpg?r=c53",
+    id: "7",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
   },
   {
-    image:
-      "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABWHCW6xDItLlbOBUS-7s837Opyb1bKURQ-R7sL19AyFN4bhjFXXIyuFGkX0AxQ6zSIA4J3wQSYcWViWAv4RpP8akFXhd5RlBD7wBEuE8Af0_khj6f2u5zpFq6Csb79UjQcY-.jpg?r=a9f",
+    id: "8",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "9",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "10",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "11",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "12",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
   },
   {
-    image:
-      "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABW5II7fDZ4A6lK5MHFwmos1aFDeWhuubtpHpoXyQhprlcVrpo5gWIojZs_wMtSkTg6ho4TQM9IQo0yj0wnHMMc7TKLN90i-Y5DJuu51N7XwczXgcD2ESSn67Rdg6MJHwKpPH.jpg?r=063",
+    id: "13",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+
+  {
+    id: "14",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+  {
+    id: "15",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
+  },
+  {
+    id: "16",
+    link: "/",
+    img: {
+      tall: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/WNk1mr9x_Cd_2itp6pUM7-lXMJg/AAAABTr0ZBpFrDwPCifsuSZC388Hj8ZJkdOz0T9dfz4QBhFA6HOX3dO4_JYRpOXbWKV31MyAUt08XP8XKwWxIuK4QS9dqGEjSUTthcAmKR8eHdRCh0DEkU5goLx0XKgUYFRbPdhjWQ.jpg?r=a04",
+      wide: "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6gmvu2hxdfnQ55LZZjyzYR4kzGk/AAAABXihq-IaBKb4Y1BTm7FMDIME4dN_hPAnp0kKvnx1DR_Xsfxc-_Ee4ekvX81Y1vwE46h3CoziJ8JR1Y-IB1BsaaHRoN7MTGTJOjXKM1wmzYyDgYuKhNlvyA37qh_TGSaJtVgn.jpg?r=280",
+    },
   },
 ];
 
@@ -41,11 +159,11 @@ export default function Home() {
       <div
         style={{
           minHeight: "500px",
-          position: "relative",
-          overflow: "hidden",
+          // position: "relative",
+          // overflow: "hidden",
         }}
       >
-        <div className="container">
+        <div style={{ margin: "0 5%" }}>
           <Typography
             color="light"
             variant="subtitle"
@@ -54,16 +172,11 @@ export default function Home() {
           >
             Documentaries
           </Typography>
-          <div style={{ display: "flex" }}>
-            {carousel1.map((item) => {
-              return (
-                <div key={item.image} style={{ marginRight: "0.5rem" }}>
-                  <img alt="" src={item.image} />
-                </div>
-              );
-            })}
-          </div>
         </div>
+        <MediaCarousel
+          items={slides}
+          //  inScreenItems={6}
+        />
       </div>
     </>
   );
