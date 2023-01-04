@@ -1,4 +1,4 @@
-import { Carousel, Typography } from "library";
+import { Typography } from "library";
 import {
   FeaturedMediaHorizontal,
   FeaturedMediaVertical,

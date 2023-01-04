@@ -22,42 +22,6 @@ interface MediaCarouselItemImages {
   wide?: string;
 }
 
-function debounce<A = unknown, R = void>(fn: (args: A) => R, timeout = 500) {
-  let timer: string | number | NodeJS.Timeout | undefined;
-  return (args: A) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      fn.call(null, args);
-    }, timeout);
-  };
-}
-
-// function throttle<A = unknown, R = void>(fn: (args: A) => R, interval = 300) {
-//   let enableCall = true;
-
-//   return function (args: A) {
-//     if (!enableCall) return;
-
-//     enableCall = false;
-//     fn.call(null, args);
-//     setTimeout(() => (enableCall = true), interval);
-//   };
-// }
-
-function throttle<A = unknown, R = void>(fn: (args: A) => R, timeout = 1000) {
-  let wait = false;
-
-  return (args: A) => {
-    if (wait) return;
-
-    fn.call(null, args);
-    wait = true;
-    setTimeout(() => {
-      wait = false;
-    }, timeout);
-  };
-}
-
 export default function MediaCarousel({ items }: MediaCarouselProps) {
   // State
   const { width } = useWindowSize();
