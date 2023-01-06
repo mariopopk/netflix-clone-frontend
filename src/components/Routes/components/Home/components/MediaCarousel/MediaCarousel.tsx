@@ -1,29 +1,46 @@
-import { useRef, CSSProperties } from "react";
+import { useRef, CSSProperties, useState, useEffect, ReactNode } from "react";
 import styles from "./MediaCarousel.module.css";
 import cx from "classnames";
 import { AspectRatioBox, useWindowSize } from "@mariopopk/react-lightning";
 import { UilAngleRightB, UilAngleLeftB } from "@iconscout/react-unicons";
 import useSlideMediaCarousel from "./useSlideMediaCarousel";
+import { Show } from "../../../../../../dummyData";
 
 export interface MediaCarouselProps {
   items: MediaCarouselItem[];
   inScreenItems?: number;
 }
 
-export interface MediaCarouselItem {
-  id: string;
-  link?: string;
-  img: MediaCarouselItemImages;
+// id: string;
+//   name: string;
+//   description: string;
+//   releaseYear: string;
+//   maturityLevel: MaturityLevel;
+//   keywords: string;
+//   starring: string[];
+//   cast: string[];
+//   audio: string[];
+//   subtitles?: string[];
+//   images: ShowImages;
+
+export interface MediaCarouselItem
+  extends Omit<
+    Show,
+    | "description"
+    | "releaseYear"
+    | "maturityLevel"
+    | "keywords"
+    | "starring"
+    | "cast"
+    | "audio"
+    | "subtitles"
+    | "genres"
+  > {
   style?: CSSProperties;
 }
 
 export interface MediaCarouselItemProps extends MediaCarouselItem {
   isFocusable: boolean;
-}
-
-interface MediaCarouselItemImages {
-  tall?: string;
-  wide?: string;
 }
 
 export default function MediaCarousel({ items }: MediaCarouselProps) {
@@ -67,17 +84,16 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
           transition: width >= 768 ? `ease-out 0.75s` : "none",
         }}
       >
-        {items.map(({ id, link, img }: MediaCarouselItem, i: number) => {
+        {items.map(({ id, images, name }: MediaCarouselItem, i: number) => {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems;
 
-          console.log(isFocusable, i);
           return (
             <CarouselItem
               isFocusable={isFocusable}
               key={id}
-              img={img}
-              link={link}
+              name={name}
+              images={images}
               id={id}
               style={{
                 width: `${screenSize / currentInScreenItems}%`,
@@ -100,41 +116,92 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   );
 }
 
-function CarouselItem({ img, style, isFocusable }: MediaCarouselItemProps) {
+function CarouselItem({
+  images,
+  style,
+  isFocusable,
+  name,
+}: MediaCarouselItemProps) {
+  const [error, setError] = useState<{ tall: boolean; wide: boolean }>({
+    tall: false,
+    wide: false,
+  });
   const tabIndex = isFocusable ? 0 : -1;
+  const placeholder =
+    "https://occ-0-2794-2218.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABRnfEBXpcJ74jyyz7MAdd6_jB5O3RPBzOEKhWUrI7nTXfN5c-JC7Da2NbFHiXOLCk5XvpCsOZzXj7haod8rletqu5dqp6rv2uo45.jpg?r=88a";
+
+  const setTallImageError = () =>
+    setError(({ wide }) => ({ wide, tall: true }));
+  const setWideImageError = () =>
+    setError(({ tall }) => ({ tall, wide: true }));
+
+  useEffect(() => {
+    if (!images?.tallThumbnail) {
+      setTallImageError();
+    }
+
+    if (!images?.wideThumbnail) {
+      setWideImageError();
+    }
+  }, [images]);
+
   return (
     <div className={styles["MediaCarousel-item"]} style={style}>
       <div className="d-none d-md-block" tabIndex={tabIndex}>
         <AspectRatioBox aspectRatio={{ w: 16, h: 9 }}>
           <div style={{ margin: "0.2rem" }}>
             <img
-              alt=""
+              onError={setWideImageError}
+              alt={name}
               style={{
                 height: "100%",
                 objectFit: "cover",
                 width: "100%",
               }}
-              src={img.wide}
+              src={!error.wide ? images?.wideThumbnail : placeholder}
             />
           </div>
+          {error.wide && <CarouselItemOverlay>{name}</CarouselItemOverlay>}
         </AspectRatioBox>
       </div>
 
-      <div className="d-block d-md-none" tabIndex={0}>
+      <div className="d-block d-md-none " tabIndex={0}>
         <AspectRatioBox aspectRatio={{ w: 47, h: 66 }}>
-          <div style={{ padding: "0.2rem", height: "97%" }}>
+          <div style={{ padding: "0.2rem", height: "100%" }}>
             <img
-              alt=""
+              onError={setTallImageError}
+              alt={name}
               style={{
                 height: "100%",
                 objectFit: "cover",
                 width: "100%",
               }}
-              src={img.tall}
+              src={!error.tall ? images?.tallThumbnail : placeholder}
             />
           </div>
+
+          {error.tall && <CarouselItemOverlay>{name}</CarouselItemOverlay>}
         </AspectRatioBox>
       </div>
+    </div>
+  );
+}
+
+function CarouselItemOverlay({ children }: { children: ReactNode }) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: "0px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        whiteSpace: "normal",
+        padding: "0.25rem",
+        textAlign: "center",
+      }}
+    >
+      {children}
     </div>
   );
 }

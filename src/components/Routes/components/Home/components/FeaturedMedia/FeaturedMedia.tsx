@@ -5,43 +5,38 @@ import {
   Jumbotron,
   Card,
 } from "@mariopopk/react-lightning";
-import { UilPlay, UilInfoCircle } from "@iconscout/react-unicons";
+import { UilPlay, UilInfoCircle, UilPlus } from "@iconscout/react-unicons";
 import { CSSProperties } from "react";
+import { Show } from "../../../../../../dummyData";
 
-interface JumbotronProps {
+interface FeaturedMediaProps {
   style?: CSSProperties;
+  item: Show;
 }
 
-const featuredCard = {
-  title: "Invisible City",
-  keywords: ["Suspenseful", "Mystery", "Intriguing"],
-  description:
-    "After a family tragedy, a man discovers mythical creatures living among humans — and soon realizes they hold the key to his mysterious past.",
-  titleImage:
-    "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABRTzDXKy2kDi4Qqcf6OuSYsJg9d8Fi1Aoh89XlCxJVcGBFEAi5Ez-LkyYiLS1D360CyRvTfR68uaNbGtjJZAw9aZZHLT-jirIoZxJqSVSYDNpNq1qys1myspzoVOa6fIc4Pz2RdwcsViqNS5gOnXgZsi-YQUzweS_Os1I3CJrieXm6y3nCO9mA.webp?r=dd1",
-  horizontalImage:
-    "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTRoz3p-wPSLvOBzh1WOF67lLaGOVEP_eX4vPq69G2N0O1cdH0kpxWHZehVhdpnb0357igpDD2t9bjSuWgWTy4YxCuCYYhx45NrZ.webp?r=ba2",
-  verticalImage:
-    "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABdbyaIho7w8lDofejtQkmCl6Gj0DTlJrVIWfHeFfe_yfLmnAe8sN96CYDt9V7sPZ-cqgFMOK90gASbnKwc_Ks33eyFkXB8jTeFY4.jpg?r=07d",
-};
-
-export function FeaturedMediaHorizontal({ style }: JumbotronProps) {
+export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
   return (
     <div style={style}>
       <AspectRatioBox aspectRatio={{ w: 16, h: 7 }}>
         <Card
-          imageBackground={featuredCard.horizontalImage}
+          imageBackground={item.images?.wideBanner}
           style={{ width: "100%", height: "100%", borderWidth: "0" }}
         >
-          <div className="container" style={{ height: "100%" }}>
+          <div style={{ padding: "0 4%", width: "100%", height: "100%" }}>
             <Jumbotron
               horizontalAlignment="left"
-              verticalAlignment="middle"
+              verticalAlignment="bottom"
               innerWidth="35%"
             >
-              <div>
-                <MediaTitle />
-                <MediaText />
+              <div style={{ marginBottom: "11.5%" }}>
+                <MediaTitle
+                  title={item?.name}
+                  titleImage={item?.images?.logo}
+                />
+                <MediaText
+                  description={item?.description}
+                  keywords={item?.keywords}
+                />
                 <MediaButtonGroup />
               </div>
             </Jumbotron>
@@ -52,18 +47,19 @@ export function FeaturedMediaHorizontal({ style }: JumbotronProps) {
   );
 }
 
-export function FeaturedMediaVertical({ style }: JumbotronProps) {
+export function FeaturedMediaVertical({ item }: FeaturedMediaProps) {
   return (
     <>
-      <div style={{ margin: "5%", marginTop: "5rem" }}>
-        <AspectRatioBox aspectRatio={{ w: 5, h: 7 }}>
+      <div>
+        <AspectRatioBox aspectRatio={{ w: 5, h: 7.1 }}>
           <Card
-            imageBackground={featuredCard.verticalImage}
+            imageBackground={item.images?.tallBanner}
             style={{
               width: "100%",
               height: "100%",
               display: "flex",
               border: 0,
+              borderRadius: 0,
             }}
           >
             <div
@@ -73,11 +69,15 @@ export function FeaturedMediaVertical({ style }: JumbotronProps) {
                 flexDirection: "column",
                 alignItems: "center",
                 marginTop: "auto",
-                padding: "8% 5%",
+                padding: "7% 4%",
+                width: "100%",
               }}
             >
-              <MediaTitle />
-              <MediaText />
+              <MediaTitle title={item?.name} titleImage={item?.images?.logo} />
+              <MediaText
+                description={item?.description}
+                keywords={item?.keywords}
+              />
               <MediaButtonGroup />
             </div>
           </Card>
@@ -87,28 +87,50 @@ export function FeaturedMediaVertical({ style }: JumbotronProps) {
   );
 }
 
-function MediaTitle() {
+interface MediaTitleProps {
+  title: string;
+  titleImage: string;
+}
+
+function MediaTitle({ title, titleImage }: MediaTitleProps) {
   return (
-    <img
-      style={{ maxWidth: "80%" }}
-      alt={featuredCard.title}
-      src={featuredCard.titleImage}
-    />
+    <>
+      <div className="d-none d-xl-block">
+        <img
+          style={{ maxWidth: "100%", minWidth: "60%" }}
+          alt={title}
+          src={titleImage}
+        />
+      </div>
+
+      <div className="d-xl-none d-xl-none">
+        <img
+          style={{ maxHeight: "7rem", maxWidth: "100%" }}
+          alt={title}
+          src={titleImage}
+        />
+      </div>
+    </>
   );
 }
 
-function MediaText() {
+interface MediaTextProps {
+  description: string;
+  keywords: string;
+}
+
+function MediaText({ description, keywords }: MediaTextProps) {
   return (
     <>
       <div className="d-none d-xl-block">
         <Typography variant="subtitle" color="light" fontWeight="normal">
-          {featuredCard.description}
+          {description}
         </Typography>
       </div>
 
       <div className="d-xl-none d-xl-none">
         <Typography variant="base" color="light" fontWeight="normal">
-          {featuredCard.keywords.map((keyword, i) => {
+          {keywords.split(",").map((keyword, i) => {
             if (i === 0) return <span key={keyword}>{keyword}</span>;
             return <span key={keyword}> • {keyword}</span>;
           })}
@@ -120,24 +142,52 @@ function MediaText() {
 
 function MediaButtonGroup() {
   return (
-    <div className="d-flex flex-wrap ">
-      <Button
-        style={{ marginRight: "1rem" }}
-        backgroundColor="light"
-        size="md"
-        icon={<UilPlay />}
-      >
-        Play
-      </Button>
+    <>
+      <div className="d-none d-xl-block">
+        <div className="d-flex flex-wrap ">
+          <Button
+            style={{ marginRight: "0.5rem", maxWidth: "45%" }}
+            backgroundColor="light"
+            size="lg"
+            icon={<UilPlay />}
+          >
+            Play
+          </Button>
 
-      <Button
-        backgroundColor="secondary"
-        size="md"
-        color="light"
-        icon={<UilInfoCircle />}
-      >
-        More Info
-      </Button>
-    </div>
+          <Button
+            style={{ maxWidth: "45%" }}
+            backgroundColor="secondary"
+            size="lg"
+            color="light"
+            icon={<UilInfoCircle />}
+          >
+            More Info
+          </Button>
+        </div>
+      </div>
+
+      <div className="d-xl-none d-xl-none">
+        <div className="d-flex flex-wrap " style={{ minWidth: "250px" }}>
+          <Button
+            style={{ marginRight: "2%", width: "49%" }}
+            backgroundColor="light"
+            size="md"
+            icon={<UilPlay />}
+          >
+            Play
+          </Button>
+
+          <Button
+            style={{ width: "49%" }}
+            backgroundColor="secondary"
+            size="md"
+            color="light"
+            icon={<UilPlus />}
+          >
+            My List
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }
