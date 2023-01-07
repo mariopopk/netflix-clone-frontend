@@ -55,14 +55,12 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
         {items.map(({ id, images, name }, i: number) => {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems;
-
           return (
             <MediaCarouselItem
               isFocusable={isFocusable}
               key={id}
               name={name}
               images={images}
-              id={id}
               style={{
                 width: `${screenSize / currentInScreenItems}%`,
               }}

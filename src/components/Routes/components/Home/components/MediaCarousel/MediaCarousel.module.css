@@ -74,6 +74,9 @@
 
 .MediaCarousel-item img {
   border-radius: 0.25rem;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .MediaCarousel-item:first-child {
@@ -82,6 +85,17 @@
 
 .MediaCarousel-item:last-child {
   margin-right: 2%;
+}
+
+.MediaCarousel-item-overlay {
+  position: absolute;
+  inset: 0px;
+  display: flex;
+  alignitems: center;
+  justifycontent: center;
+  whitespace: normal;
+  padding: 0.25rem;
+  textalign: center;
 }
 
 @media screen and (min-width: 768px) {

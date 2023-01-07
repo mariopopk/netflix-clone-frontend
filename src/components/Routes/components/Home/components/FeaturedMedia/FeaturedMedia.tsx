@@ -1,13 +1,9 @@
-import {
-  Button,
-  Typography,
-  AspectRatioBox,
-  Jumbotron,
-  Card,
-} from "@mariopopk/react-lightning";
-import { UilPlay, UilInfoCircle, UilPlus } from "@iconscout/react-unicons";
+import { AspectRatioBox, Jumbotron, Card } from "@mariopopk/react-lightning";
 import { CSSProperties } from "react";
 import { Show } from "../../../../../../dummyData";
+import FeaturedMediaButtonGroup from "./FeaturedMediaButtonGroup";
+import FeaturedMediaText from "./FeaturedMediaText";
+import { FeaturedMediaTitle } from "./FeaturedMediaTitle";
 
 interface FeaturedMediaProps {
   style?: CSSProperties;
@@ -28,16 +24,16 @@ export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
               verticalAlignment="bottom"
               innerWidth="35%"
             >
-              <div style={{ marginBottom: "11.5%" }}>
-                <MediaTitle
+              <div style={{ marginBottom: "12.5%" }}>
+                <FeaturedMediaTitle
                   title={item?.name}
                   titleImage={item?.images?.logo}
                 />
-                <MediaText
+                <FeaturedMediaText
                   description={item?.description}
                   keywords={item?.keywords}
                 />
-                <MediaButtonGroup />
+                <FeaturedMediaButtonGroup />
               </div>
             </Jumbotron>
           </div>
@@ -73,120 +69,18 @@ export function FeaturedMediaVertical({ item }: FeaturedMediaProps) {
                 width: "100%",
               }}
             >
-              <MediaTitle title={item?.name} titleImage={item?.images?.logo} />
-              <MediaText
+              <FeaturedMediaTitle
+                title={item?.name}
+                titleImage={item?.images?.logo}
+              />
+              <FeaturedMediaText
                 description={item?.description}
                 keywords={item?.keywords}
               />
-              <MediaButtonGroup />
+              <FeaturedMediaButtonGroup />
             </div>
           </Card>
         </AspectRatioBox>
-      </div>
-    </>
-  );
-}
-
-interface MediaTitleProps {
-  title: string;
-  titleImage: string;
-}
-
-function MediaTitle({ title, titleImage }: MediaTitleProps) {
-  return (
-    <>
-      <div className="d-none d-xl-block">
-        <img
-          style={{ maxWidth: "100%", minWidth: "60%" }}
-          alt={title}
-          src={titleImage}
-        />
-      </div>
-
-      <div className="d-xl-none d-xl-none">
-        <img
-          style={{ maxHeight: "7rem", maxWidth: "100%" }}
-          alt={title}
-          src={titleImage}
-        />
-      </div>
-    </>
-  );
-}
-
-interface MediaTextProps {
-  description: string;
-  keywords: string;
-}
-
-function MediaText({ description, keywords }: MediaTextProps) {
-  return (
-    <>
-      <div className="d-none d-xl-block">
-        <Typography variant="subtitle" color="light" fontWeight="normal">
-          {description}
-        </Typography>
-      </div>
-
-      <div className="d-xl-none d-xl-none">
-        <Typography variant="base" color="light" fontWeight="normal">
-          {keywords.split(",").map((keyword, i) => {
-            if (i === 0) return <span key={keyword}>{keyword}</span>;
-            return <span key={keyword}> • {keyword}</span>;
-          })}
-        </Typography>
-      </div>
-    </>
-  );
-}
-
-function MediaButtonGroup() {
-  return (
-    <>
-      <div className="d-none d-xl-block">
-        <div className="d-flex flex-wrap ">
-          <Button
-            style={{ marginRight: "0.5rem", maxWidth: "45%" }}
-            backgroundColor="light"
-            size="lg"
-            icon={<UilPlay />}
-          >
-            Play
-          </Button>
-
-          <Button
-            style={{ maxWidth: "45%" }}
-            backgroundColor="secondary"
-            size="lg"
-            color="light"
-            icon={<UilInfoCircle />}
-          >
-            More Info
-          </Button>
-        </div>
-      </div>
-
-      <div className="d-xl-none d-xl-none">
-        <div className="d-flex flex-wrap " style={{ minWidth: "250px" }}>
-          <Button
-            style={{ marginRight: "2%", width: "49%" }}
-            backgroundColor="light"
-            size="md"
-            icon={<UilPlay />}
-          >
-            Play
-          </Button>
-
-          <Button
-            style={{ width: "49%" }}
-            backgroundColor="secondary"
-            size="md"
-            color="light"
-            icon={<UilPlus />}
-          >
-            My List
-          </Button>
-        </div>
       </div>
     </>
   );

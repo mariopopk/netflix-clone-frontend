@@ -5,32 +5,26 @@ import styles from "./MediaCarousel.module.css";
 import { MediaCarouselItemOverlay } from "./MediaCarouselItemOverlay";
 
 export interface MediaCarouselData
-  extends Omit<
-    Show,
-    | "description"
-    | "releaseYear"
-    | "maturityLevel"
-    | "keywords"
-    | "starring"
-    | "cast"
-    | "audio"
-    | "subtitles"
-    | "genres"
-  > {}
+  extends Pick<Show, "images" | "name">,
+    Pick<Partial<Show>, "id"> {}
 
 export interface MediaCarouselItemProps extends MediaCarouselData {
   isFocusable: boolean;
   style?: CSSProperties;
 }
 
+interface ImageError {
+  tall: boolean;
+  wide: boolean;
+}
+
 export default function MediaCarouselItem({
-  id,
   images,
   style,
   isFocusable,
   name,
 }: MediaCarouselItemProps) {
-  const [error, setError] = useState<{ tall: boolean; wide: boolean }>({
+  const [error, setError] = useState<ImageError>({
     tall: false,
     wide: false,
   });
@@ -44,13 +38,8 @@ export default function MediaCarouselItem({
     setError(({ tall }) => ({ tall, wide: true }));
 
   useEffect(() => {
-    if (!images?.tallThumbnail) {
-      setTallImageError();
-    }
-
-    if (!images?.wideThumbnail) {
-      setWideImageError();
-    }
+    if (!images?.tallThumbnail) setTallImageError();
+    if (!images?.wideThumbnail) setWideImageError();
   }, [images]);
 
   return (
@@ -61,11 +50,6 @@ export default function MediaCarouselItem({
             <img
               onError={setWideImageError}
               alt={name}
-              style={{
-                height: "100%",
-                objectFit: "cover",
-                width: "100%",
-              }}
               src={!error.wide ? images?.wideThumbnail : placeholder}
             />
           </div>
@@ -75,15 +59,10 @@ export default function MediaCarouselItem({
 
       <div className="d-block d-md-none " tabIndex={0}>
         <AspectRatioBox aspectRatio={{ w: 47, h: 66 }}>
-          <div style={{ padding: "0.2rem", height: "100%" }}>
+          <div style={{ padding: "0.2rem" }}>
             <img
               onError={setTallImageError}
               alt={name}
-              style={{
-                height: "100%",
-                objectFit: "cover",
-                width: "100%",
-              }}
               src={!error.tall ? images?.tallThumbnail : placeholder}
             />
           </div>
