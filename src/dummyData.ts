@@ -16,7 +16,7 @@ export interface Show {
 export interface ShowImages {
   tallBanner: string;
   wideBanner: string;
-  tallThumbnail?: string;
+  tallThumbnail: string;
   wideThumbnail: string;
   logo: string;
 }
