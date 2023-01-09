@@ -7,7 +7,7 @@ import useSlideMediaCarousel from "./useSlideMediaCarousel";
 import MediaCarouselItem, { MediaCarouselData } from "./MediaCarouselItem";
 
 export interface MediaCarouselProps {
-  items: MediaCarouselData[];
+  items?: MediaCarouselData[];
   inScreenItems?: number;
 }
 
@@ -15,6 +15,8 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   // State
   const { width } = useWindowSize();
   const MediaCarouselRef = useRef<HTMLDivElement>(null);
+
+  const totalItems = items?.length || 0;
 
   const inScreenItems = {
     // breakpoint -> inScreenItem
@@ -30,7 +32,7 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   const { positionX, move, currentItem } = useSlideMediaCarousel({
     MediaCarouselRef,
     inScreenItems: currentInScreenItems,
-    totalItems: items.length,
+    totalItems: items?.length,
   });
 
   return (
@@ -52,7 +54,7 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
           transition: width >= 768 ? `ease-out 0.75s` : "none",
         }}
       >
-        {items.map(({ id, images, name }, i: number) => {
+        {items?.map(({ id, images, name }, i: number) => {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems;
           return (
@@ -70,7 +72,7 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
       </div>
 
       <button
-        disabled={currentItem === items.length - currentInScreenItems}
+        disabled={currentItem === totalItems - currentInScreenItems}
         className={cx(styles["MediaCarousel-button"], styles.right)}
         onClick={() => {
           move("right", currentInScreenItems);

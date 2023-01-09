@@ -1,13 +1,13 @@
 import { AspectRatioBox, Jumbotron, Card } from "@mariopopk/react-lightning";
 import { CSSProperties } from "react";
-import { Show } from "../../../../../../dummyData";
+import { Show } from "../../../../../../types/Show";
 import FeaturedMediaButtonGroup from "./FeaturedMediaButtonGroup";
 import FeaturedMediaText from "./FeaturedMediaText";
 import { FeaturedMediaTitle } from "./FeaturedMediaTitle";
 
 interface FeaturedMediaProps {
   style?: CSSProperties;
-  item: Show;
+  item?: Show;
 }
 
 export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
@@ -15,7 +15,7 @@ export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
     <div style={style}>
       <AspectRatioBox aspectRatio={{ w: 16, h: 7 }}>
         <Card
-          imageBackground={item.images?.wideBanner}
+          imageBackground={item?.images?.wideBanner}
           style={{ width: "100%", height: "100%", borderWidth: "0" }}
         >
           <div style={{ padding: "0 4%", width: "100%", height: "100%" }}>
@@ -49,7 +49,7 @@ export function FeaturedMediaVertical({ item }: FeaturedMediaProps) {
       <div>
         <AspectRatioBox aspectRatio={{ w: 5, h: 7.1 }}>
           <Card
-            imageBackground={item.images?.tallBanner}
+            imageBackground={item?.images?.tallBanner}
             style={{
               width: "100%",
               height: "100%",

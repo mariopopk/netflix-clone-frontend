@@ -7,9 +7,6 @@ function App() {
       <NavBar />
 
       <Routes />
-      {/* <div>
-        <div>Movies</div>
-      </div> */}
     </>
   );
 }

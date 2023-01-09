@@ -2,13 +2,13 @@ import { useEffect, useState, RefObject } from "react";
 
 export interface useSlideMediaCarouselProps {
   inScreenItems: number;
-  totalItems: number;
+  totalItems?: number;
   MediaCarouselRef: RefObject<HTMLDivElement>;
 }
 
 export default function useSlideMediaCarousel({
   inScreenItems,
-  totalItems,
+  totalItems = 0,
   MediaCarouselRef,
 }: useSlideMediaCarouselProps) {
   const [containerWidth, setContainerWidth] = useState<number>(0);

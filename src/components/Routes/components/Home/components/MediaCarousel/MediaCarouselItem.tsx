@@ -1,12 +1,11 @@
 import { AspectRatioBox } from "@mariopopk/react-lightning";
 import { CSSProperties, useEffect, useState } from "react";
-import { Show } from "../../../../../../dummyData";
+import { Show } from "../../../../../../types/Show";
 import styles from "./MediaCarousel.module.css";
 import { MediaCarouselItemOverlay } from "./MediaCarouselItemOverlay";
 
 export interface MediaCarouselData
-  extends Pick<Show, "images" | "name">,
-    Pick<Partial<Show>, "id"> {}
+  extends Pick<Partial<Show>, "id" | "images" | "name"> {}
 
 export interface MediaCarouselItemProps extends MediaCarouselData {
   isFocusable: boolean;

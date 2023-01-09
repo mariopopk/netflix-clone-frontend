@@ -1,6 +1,6 @@
 interface MediaTitleProps {
-  title: string;
-  titleImage: string;
+  title?: string;
+  titleImage?: string;
 }
 
 export function FeaturedMediaTitle({ title, titleImage }: MediaTitleProps) {
