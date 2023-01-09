@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ReactNode } from "react";
 
-const uri = "http://localhost:1337/graphql";
+const uri = process.env.REACT_APP_GRAPHQL_SERVICE + "/graphql";
 
 const client = new ApolloClient({
   uri,
