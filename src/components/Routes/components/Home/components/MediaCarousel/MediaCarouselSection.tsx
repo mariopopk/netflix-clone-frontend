@@ -1,15 +1,17 @@
 import { Typography } from "@mariopopk/react-lightning";
-import useGetShow from "./hooks/useGetCarouselData";
+import useGetCarouselData from "./hooks/useGetCarouselData";
 import MediaCarousel from "./MediaCarousel";
 
-export default function MediaCarouselSection() {
-  const { data, loading, error } = useGetShow("TV Mysteries");
+interface MediaCarouselSectionProps {
+  category: string;
+}
 
+export default function MediaCarouselSection({
+  category,
+}: MediaCarouselSectionProps) {
+  const { data } = useGetCarouselData(category);
   return (
     <>
-      {loading && "Loading..."}
-      {error && error.message}
-
       {data && (
         <>
           <div style={{ margin: "0 4%", marginTop: "1.25rem" }}>
@@ -20,10 +22,10 @@ export default function MediaCarouselSection() {
               fontWeight="semibold"
               component="h2"
             >
-              {data.name}
+              {data.genre?.data?.attributes?.name}
             </Typography>
           </div>
-          <MediaCarousel items={data.shows} />
+          <MediaCarousel shows={data.genre?.data?.attributes?.shows} />
         </>
       )}
     </>

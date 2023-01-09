@@ -4,7 +4,7 @@ export interface Show {
   description?: string;
   releaseYear?: string;
   maturityLevel?: ShowMaturityLevel;
-  keywords?: string[];
+  keywords?: string | undefined[];
   genres?: string[];
   starring?: string[];
   cast?: string[];

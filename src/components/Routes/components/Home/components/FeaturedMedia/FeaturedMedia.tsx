@@ -1,6 +1,6 @@
 import { AspectRatioBox, Jumbotron, Card } from "@mariopopk/react-lightning";
 import { CSSProperties } from "react";
-import { Show } from "../../../../../../types/Show";
+import { Show } from "../../../../../../apollo/types/Show/ShowQuery";
 import FeaturedMediaButtonGroup from "./FeaturedMediaButtonGroup";
 import FeaturedMediaText from "./FeaturedMediaText";
 import { FeaturedMediaTitle } from "./FeaturedMediaTitle";
@@ -31,7 +31,7 @@ export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
                 />
                 <FeaturedMediaText
                   description={item?.description}
-                  keywords={item?.keywords}
+                  keywords={item?.keywords?.data}
                 />
                 <FeaturedMediaButtonGroup />
               </div>
@@ -75,7 +75,7 @@ export function FeaturedMediaVertical({ item }: FeaturedMediaProps) {
               />
               <FeaturedMediaText
                 description={item?.description}
-                keywords={item?.keywords}
+                keywords={item?.keywords?.data}
               />
               <FeaturedMediaButtonGroup />
             </div>

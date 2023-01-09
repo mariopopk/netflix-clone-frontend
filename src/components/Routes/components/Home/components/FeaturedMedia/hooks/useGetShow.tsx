@@ -1,7 +1,5 @@
 import { useQuery, gql, ApolloError } from "@apollo/client";
-import QueryResponseOne from "../../../../../apollo/types/QueryResponseOne";
-import { ShowResponse } from "../../../../../apollo/types/Show/Show";
-import { Show } from "../../../../../types/Show";
+import ShowQuery from "../../../../../../../apollo/types/Show/ShowQuery";
 
 const getShow = gql`
   query getShow($id: ID!) {
@@ -23,6 +21,7 @@ const getShow = gql`
           }
           genres {
             data {
+              id
               attributes {
                 name
               }
@@ -30,6 +29,7 @@ const getShow = gql`
           }
           starring {
             data {
+              id
               attributes {
                 name
               }
@@ -37,6 +37,7 @@ const getShow = gql`
           }
           cast {
             data {
+              id
               attributes {
                 name
               }
@@ -44,6 +45,7 @@ const getShow = gql`
           }
           genres {
             data {
+              id
               attributes {
                 name
               }
@@ -51,6 +53,7 @@ const getShow = gql`
           }
           keywords {
             data {
+              id
               attributes {
                 name
               }
@@ -58,6 +61,7 @@ const getShow = gql`
           }
           audio {
             data {
+              id
               attributes {
                 name
               }
@@ -65,12 +69,14 @@ const getShow = gql`
           }
           subtitles {
             data {
+              id
               attributes {
                 name
               }
             }
           }
           images {
+            id
             tallBanner
             tallThumbnail
             wideThumbnail
@@ -83,35 +89,20 @@ const getShow = gql`
   }
 `;
 
-interface QueryResponse extends QueryResponseOne<"show", ShowResponse> {}
-
-// TODO: V2 - redo
 export default function useGetShow(id: string | number): {
-  data?: Show;
+  data?: ShowQuery;
   loading?: boolean;
   error?: ApolloError;
 } {
-  const { loading, error, data } = useQuery<QueryResponse>(getShow, {
+  const { loading, error, data } = useQuery<ShowQuery>(getShow, {
     variables: {
       id,
     },
   });
-  //   data[0].attributes.name
-  console.log("hi");
 
   return {
     loading,
     error,
-    data: {
-      id: data?.show?.data?.id,
-      name: data?.show?.data?.attributes?.name,
-      images: data?.show?.data?.attributes?.images,
-      description: data?.show?.data?.attributes?.description,
-      releaseYear: data?.show?.data?.attributes?.releaseYear,
-      maturityLevel: data?.show?.data?.attributes?.maturityLevel,
-      keywords: data?.show?.data?.attributes?.keywords?.data?.map((item) => {
-        return item?.attributes?.name!;
-      }),
-    },
+    data,
   };
 }

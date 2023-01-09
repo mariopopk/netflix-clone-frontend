@@ -1,11 +1,11 @@
 import { useQuery, gql, ApolloError } from "@apollo/client";
-import QueryResponseGenres from "../../../../../../../apollo/types/QueryResponseGenres";
-import { MediaCarouselData } from "../MediaCarouselItem";
+import GenreQuery from "../../../../../../../apollo/types/Genre/GenreQuery";
 
 const getCarouselShowData = gql`
-  query getCarouselShowData($categoryName: String!) {
-    genres(filters: { name: { eq: $categoryName } }) {
+  query getCarouselShowData($id: ID!) {
+    genre(id: $id) {
       data {
+        id
         attributes {
           name
           shows {
@@ -14,6 +14,7 @@ const getCarouselShowData = gql`
               attributes {
                 name
                 images {
+                  id
                   wideBanner
                   wideThumbnail
                   tallBanner
@@ -29,41 +30,20 @@ const getCarouselShowData = gql`
   }
 `;
 
-interface Genre {
-  name?: string;
-  shows?: MediaCarouselData[];
-}
-
-export default function useGetCarouselData(categoryName: string): {
+export default function useGetCarouselData(id: string): {
   error?: ApolloError;
   loading: boolean;
-  data: Genre;
+  data?: GenreQuery;
 } {
-  const { loading, error, data } = useQuery<QueryResponseGenres>(
-    getCarouselShowData,
-    {
-      variables: {
-        categoryName,
-      },
-    }
-  );
-
-  // This hook looks for ONE category only, so index 0 can be safely hardcoded
-  const result = {
-    name: data?.genres?.data?.[0]?.attributes?.name,
-
-    shows: data?.genres?.data?.[0]?.attributes?.shows?.data?.map((item) => {
-      return {
-        id: item?.id,
-        name: item?.attributes?.name,
-        images: item?.attributes?.images,
-      };
-    }),
-  };
+  const { loading, error, data } = useQuery<GenreQuery>(getCarouselShowData, {
+    variables: {
+      id,
+    },
+  });
 
   return {
     error,
     loading,
-    data: result,
+    data,
   };
 }

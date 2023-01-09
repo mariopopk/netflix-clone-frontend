@@ -3,21 +3,21 @@ import styles from "./MediaCarousel.module.css";
 import cx from "classnames";
 import { useWindowSize } from "@mariopopk/react-lightning";
 import { UilAngleRightB, UilAngleLeftB } from "@iconscout/react-unicons";
-import useSlideMediaCarousel from "./useSlideMediaCarousel";
-import MediaCarouselItem, { MediaCarouselData } from "./MediaCarouselItem";
+import useSlideMediaCarousel from "./hooks/useSlideMediaCarousel";
+import MediaCarouselItem from "./MediaCarouselItem";
+import ShowsQuery from "../../../../../../apollo/types/Show/ShowsQuery";
 
 export interface MediaCarouselProps {
-  items?: MediaCarouselData[];
-  inScreenItems?: number;
+  shows?: ShowsQuery["shows"];
 }
 
-export default function MediaCarousel({ items }: MediaCarouselProps) {
-  // State
+export default function MediaCarousel({ shows }: MediaCarouselProps) {
   const { width } = useWindowSize();
   const MediaCarouselRef = useRef<HTMLDivElement>(null);
 
-  const totalItems = items?.length || 0;
+  const totalItems = shows?.data?.length || 0;
 
+  // TODO: (1) Finalize breakpoints and (2) turn inScreenItems into props
   const inScreenItems = {
     // breakpoint -> inScreenItem
     large: 6,
@@ -32,7 +32,7 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
   const { positionX, move, currentItem } = useSlideMediaCarousel({
     MediaCarouselRef,
     inScreenItems: currentInScreenItems,
-    totalItems: items?.length,
+    totalItems,
   });
 
   return (
@@ -54,15 +54,15 @@ export default function MediaCarousel({ items }: MediaCarouselProps) {
           transition: width >= 768 ? `ease-out 0.75s` : "none",
         }}
       >
-        {items?.map(({ id, images, name }, i: number) => {
+        {shows?.data?.map(({ id, attributes }, i: number) => {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems;
           return (
             <MediaCarouselItem
               isFocusable={isFocusable}
               key={id}
-              name={name}
-              images={images}
+              name={attributes?.name}
+              images={attributes?.images}
               style={{
                 width: `${screenSize / currentInScreenItems}%`,
               }}

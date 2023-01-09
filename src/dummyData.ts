@@ -2112,10 +2112,8 @@ all.forEach((show) => {
   });
 });
 
-all.forEach((item) => {
-  if (!item.images.wideThumbnail) console.log(item.name);
-});
-
-// console.log({ keywords, languages, genres, actors });
+// all.forEach((item) => {
+//   if (!item.images.wideThumbnail) console.log(item.name);
+// });
 
 export default all;
