@@ -5,7 +5,13 @@ const uri = "http://localhost:1337/graphql";
 
 const client = new ApolloClient({
   uri,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Show: {
+        keyFields: ["name"],
+      },
+    },
+  }),
 });
 
 interface ProviderProps {
