@@ -7,7 +7,7 @@ export default function Home() {
       <FeaturedMediaSection />
       <div
         style={{
-          minHeight: "1000px",
+          marginBottom: "5rem",
         }}
       >
         {/* Categories are hardcoded for now */}
