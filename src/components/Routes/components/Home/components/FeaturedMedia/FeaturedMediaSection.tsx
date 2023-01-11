@@ -5,7 +5,8 @@ import {
 import useGetShow from "./hooks/useGetShow";
 
 export default function FeaturedMediaSection() {
-  const { data } = useGetShow("80232926");
+  // Hardcoded for now. Will not be in V2
+  const { data } = useGetShow("80117470");
 
   return (
     <>

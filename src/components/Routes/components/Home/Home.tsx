@@ -12,14 +12,14 @@ export default function Home() {
       >
         {/* Categories are hardcoded for now */}
         {[
-          "12211", // TV Mysteries
-          "12217", // TV Thrillers
-          "12240", // Nature & Ecology Documentaries
-          "12213", // Fantasy TV Shows
-          "12214", //  Teen TV Shows
-          "12238", // Docuseries
-          "12212", // Crime TV Shows
-          "12239", // Science & Nature Docs
+          "7", // TV Thrillers
+          "30", // Nature & Ecology Documentaries
+          "3", // Fantasy TV Shows
+          "2", // Crime TV Shows
+          "1", // TV Mysteries
+          "4", //  Teen TV Shows
+          "29", // Science & Nature Docs
+          "8", // TV Dramas
         ].map((name) => {
           return <MediaCarouselSection key={name} category={name} />;
         })}

@@ -31,7 +31,7 @@ export function FeaturedMediaHorizontal({ style, item }: FeaturedMediaProps) {
                 />
                 <FeaturedMediaText
                   description={item?.description}
-                  keywords={item?.keywords?.data}
+                  keywords={item?.keywords}
                 />
                 <FeaturedMediaButtonGroup />
               </div>
@@ -75,7 +75,7 @@ export function FeaturedMediaVertical({ item }: FeaturedMediaProps) {
               />
               <FeaturedMediaText
                 description={item?.description}
-                keywords={item?.keywords?.data}
+                keywords={item?.keywords}
               />
               <FeaturedMediaButtonGroup />
             </div>

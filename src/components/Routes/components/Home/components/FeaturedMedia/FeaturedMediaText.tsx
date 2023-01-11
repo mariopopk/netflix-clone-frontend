@@ -1,9 +1,9 @@
 import { Typography } from "@mariopopk/react-lightning";
-import { Keyword } from "../../../../../../apollo/types/Keyword/KeywordQuery";
+import KeywordsQuery from "../../../../../../apollo/types/Keyword/KeywordsQuery";
 
 interface MediaTextProps {
   description?: string;
-  keywords?: Keyword[];
+  keywords?: KeywordsQuery["keywords"];
 }
 
 export default function FeaturedMediaText({
@@ -20,10 +20,10 @@ export default function FeaturedMediaText({
 
       <div className="d-xl-none d-xl-none">
         <Typography variant="base" color="light" fontWeight="normal">
-          {keywords?.map(({ name, id }, i) => {
+          {keywords?.data?.map(({ id, attributes }, i) => {
             const firstKeyword = i === 0;
-            if (firstKeyword) return <span key={id}>{name}</span>;
-            return <span key={id}> • {name}</span>;
+            if (firstKeyword) return <span key={id}>{attributes?.name}</span>;
+            return <span key={id}> • {attributes?.name}</span>;
           })}
         </Typography>
       </div>
