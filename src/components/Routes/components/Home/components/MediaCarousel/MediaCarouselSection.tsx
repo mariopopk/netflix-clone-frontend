@@ -10,6 +10,7 @@ export default function MediaCarouselSection({
   category,
 }: MediaCarouselSectionProps) {
   const { data } = useGetCarouselData(category);
+
   return (
     <>
       {data && (

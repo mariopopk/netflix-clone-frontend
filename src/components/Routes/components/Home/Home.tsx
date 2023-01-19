@@ -1,7 +1,10 @@
 import FeaturedMediaSection from "./components/FeaturedMedia/FeaturedMediaSection";
+import useGetHomeCategoryIds from "./components/MediaCarousel/hooks/useGetHomeCategoryIds";
 import MediaCarouselSection from "./components/MediaCarousel/MediaCarouselSection";
 
 export default function Home() {
+  const { data, loading, error } = useGetHomeCategoryIds();
+
   return (
     <>
       <FeaturedMediaSection />
@@ -10,18 +13,8 @@ export default function Home() {
           marginBottom: "5rem",
         }}
       >
-        {/* Categories are hardcoded for now */}
-        {[
-          "7", // TV Thrillers
-          "30", // Nature & Ecology Documentaries
-          "3", // Fantasy TV Shows
-          "2", // Crime TV Shows
-          "1", // TV Mysteries
-          "4", //  Teen TV Shows
-          "29", // Science & Nature Docs
-          "8", // TV Dramas
-        ].map((name) => {
-          return <MediaCarouselSection key={name} category={name} />;
+        {data?.genres?.data?.map(({ id }) => {
+          return <MediaCarouselSection key={id} category={id!} />;
         })}
       </div>
     </>

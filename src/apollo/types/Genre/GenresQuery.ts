@@ -1,6 +1,6 @@
 import QueryResponseMany from "../QueryResponseMany";
 import { Genre } from "./GenreQuery";
 
-type Genres = QueryResponseMany<"genres", Genre>;
+type GenresQuery = QueryResponseMany<"genres", Genre>;
 
-export default Genres;
+export default GenresQuery;
