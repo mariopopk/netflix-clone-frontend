@@ -2,6 +2,9 @@
   "name": "netflix-clone-frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.12.x"
+  },
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@iconscout/react-unicons": "^1.1.6",
