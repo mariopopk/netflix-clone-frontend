@@ -1,4 +1,3 @@
-import { Typography } from "@mariopopk/react-lightning";
 import useGetCarouselData from "./hooks/useGetCarouselData";
 import MediaCarousel from "./MediaCarousel";
 import MediaCarouselTitle from "./MediaCarouselTitle";
@@ -10,7 +9,7 @@ interface MediaCarouselSectionProps {
 export default function MediaCarouselSection({
   category,
 }: MediaCarouselSectionProps) {
-  const { data, loading, error } = useGetCarouselData(category);
+  const { data, loading } = useGetCarouselData(category);
   return (
     <>
       {data && (
@@ -22,7 +21,7 @@ export default function MediaCarouselSection({
 
       {loading && (
         <>
-          <MediaCarouselTitle title="" />
+          <MediaCarouselTitle title="‎" />
           <MediaCarousel loading={true} />
         </>
       )}

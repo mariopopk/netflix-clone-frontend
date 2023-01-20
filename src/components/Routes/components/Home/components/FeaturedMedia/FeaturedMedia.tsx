@@ -104,7 +104,7 @@ export function FeaturedMediaVertical({
               </div>
             </Card>
           )}
-          {loading && "Loading"}
+          {loading && <Skeleton />}
 
           {error && "Error"}
         </AspectRatioBox>

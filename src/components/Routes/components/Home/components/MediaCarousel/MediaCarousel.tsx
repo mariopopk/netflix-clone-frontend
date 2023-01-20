@@ -6,6 +6,7 @@ import { UilAngleRightB, UilAngleLeftB } from "@iconscout/react-unicons";
 import useSlideMediaCarousel from "./hooks/useSlideMediaCarousel";
 import MediaCarouselItem from "./MediaCarouselItem";
 import ShowsQuery from "../../../../../../apollo/types/Show/ShowsQuery";
+import MediaCarouselItemImage from "./MediaCarouselItemImage";
 
 export interface MediaCarouselProps {
   shows?: ShowsQuery["shows"];
@@ -63,11 +64,21 @@ export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
             <MediaCarouselItem
               isFocusable={isFocusable}
               key={id}
-              name={attributes?.name}
-              images={attributes?.images}
               style={{
                 width: `${screenSize / currentInScreenItems}%`,
               }}
+              tallChildren={
+                <MediaCarouselItemImage
+                  alt={attributes?.name}
+                  image={attributes?.images?.tallThumbnail}
+                />
+              }
+              wideChildren={
+                <MediaCarouselItemImage
+                  alt={attributes?.name}
+                  image={attributes?.images?.wideThumbnail}
+                />
+              }
             />
           );
         })}
@@ -75,12 +86,14 @@ export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
         {loading &&
           [1, 1, 1, 1, 1, 1, 1, 1].map((item, i) => {
             return (
-              <Skeleton
+              <MediaCarouselItem
                 key={i}
-                variant="rectangular"
                 style={{
                   width: `${screenSize / currentInScreenItems}%`,
                 }}
+                isFocusable={false}
+                tallChildren={<Skeleton variant="rectangular" />}
+                wideChildren={<Skeleton variant="rectangular" />}
               />
             );
           })}

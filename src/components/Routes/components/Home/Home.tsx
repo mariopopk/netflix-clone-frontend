@@ -3,7 +3,7 @@ import useGetHomeCategoryIds from "./components/MediaCarousel/hooks/useGetHomeCa
 import MediaCarouselSection from "./components/MediaCarousel/MediaCarouselSection";
 
 export default function Home() {
-  const { data, loading, error } = useGetHomeCategoryIds();
+  const { data } = useGetHomeCategoryIds();
 
   return (
     <>
