@@ -1,6 +1,7 @@
 import { Typography } from "@mariopopk/react-lightning";
 import useGetCarouselData from "./hooks/useGetCarouselData";
 import MediaCarousel from "./MediaCarousel";
+import MediaCarouselTitle from "./MediaCarouselTitle";
 
 interface MediaCarouselSectionProps {
   category: string;
@@ -9,24 +10,20 @@ interface MediaCarouselSectionProps {
 export default function MediaCarouselSection({
   category,
 }: MediaCarouselSectionProps) {
-  const { data } = useGetCarouselData(category);
-
+  const { data, loading, error } = useGetCarouselData(category);
   return (
     <>
       {data && (
         <>
-          <div style={{ margin: "0 4%", marginTop: "1.25rem" }}>
-            <Typography
-              style={{ marginBottom: "0.5rem" }}
-              color="light"
-              variant="subtitle"
-              fontWeight="semibold"
-              component="h2"
-            >
-              {data.genre?.data?.attributes?.name}
-            </Typography>
-          </div>
+          <MediaCarouselTitle title={data.genre?.data?.attributes?.name} />
           <MediaCarousel shows={data.genre?.data?.attributes?.shows} />
+        </>
+      )}
+
+      {loading && (
+        <>
+          <MediaCarouselTitle title="" />
+          <MediaCarousel loading={true} />
         </>
       )}
     </>

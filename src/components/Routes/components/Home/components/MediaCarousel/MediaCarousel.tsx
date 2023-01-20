@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import styles from "./MediaCarousel.module.css";
 import cx from "classnames";
-import { useWindowSize } from "@mariopopk/react-lightning";
+import { Skeleton, useWindowSize } from "@mariopopk/react-lightning";
 import { UilAngleRightB, UilAngleLeftB } from "@iconscout/react-unicons";
 import useSlideMediaCarousel from "./hooks/useSlideMediaCarousel";
 import MediaCarouselItem from "./MediaCarouselItem";
@@ -9,9 +9,10 @@ import ShowsQuery from "../../../../../../apollo/types/Show/ShowsQuery";
 
 export interface MediaCarouselProps {
   shows?: ShowsQuery["shows"];
+  loading?: boolean;
 }
 
-export default function MediaCarousel({ shows }: MediaCarouselProps) {
+export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
   const { width } = useWindowSize();
   const MediaCarouselRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +39,7 @@ export default function MediaCarousel({ shows }: MediaCarouselProps) {
   return (
     <div className={styles["MediaCarousel"]}>
       <button
+        disabled={currentItem === 0}
         className={cx(styles["MediaCarousel-button"], styles.left)}
         onClick={() => {
           move("left", currentInScreenItems);
@@ -69,6 +71,19 @@ export default function MediaCarousel({ shows }: MediaCarouselProps) {
             />
           );
         })}
+
+        {loading &&
+          [1, 1, 1, 1, 1, 1, 1, 1].map((item, i) => {
+            return (
+              <Skeleton
+                key={i}
+                variant="rectangular"
+                style={{
+                  width: `${screenSize / currentInScreenItems}%`,
+                }}
+              />
+            );
+          })}
       </div>
 
       <button

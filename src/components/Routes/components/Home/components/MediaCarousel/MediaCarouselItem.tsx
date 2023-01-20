@@ -1,7 +1,7 @@
 import { AspectRatioBox } from "@mariopopk/react-lightning";
 import { CSSProperties, useEffect, useState } from "react";
 import { Show } from "../../../../../../types/Show";
-import styles from "./MediaCarousel.module.css";
+import styles from "./MediaCarouselItem.module.css";
 import { MediaCarouselItemOverlay } from "./MediaCarouselItemOverlay";
 
 export interface MediaCarouselData
@@ -58,7 +58,7 @@ export default function MediaCarouselItem({
 
       <div className="d-block d-md-none " tabIndex={0}>
         <AspectRatioBox aspectRatio={{ w: 47, h: 66 }}>
-          <div style={{ padding: "0.2rem" }}>
+          <div style={{ padding: "0.2rem", height: "100%" }}>
             <img
               onError={setTallImageError}
               alt={name}

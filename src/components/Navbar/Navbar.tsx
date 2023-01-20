@@ -8,7 +8,7 @@ export default function NavBar() {
     <>
       <Navbar>
         <div
-          className="d-flex justify-content-between "
+          className="d-flex justify-content-between"
           style={{ padding: "0 4%", width: "100%" }}
         >
           <div className="d-inline-flex">

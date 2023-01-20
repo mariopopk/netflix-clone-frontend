@@ -10,10 +10,18 @@ export default function FeaturedMediaSection() {
     <>
       <>
         <div className="d-none d-md-block">
-          <FeaturedMediaHorizontal item={data?.show?.data?.attributes} />
+          <FeaturedMediaHorizontal
+            item={data?.show?.data?.attributes}
+            loading={loading}
+            error={error}
+          />
         </div>
         <div className="d-md-none d-block">
-          <FeaturedMediaVertical item={data?.show?.data?.attributes} />
+          <FeaturedMediaVertical
+            item={data?.show?.data?.attributes}
+            loading={loading}
+            error={error}
+          />
         </div>
       </>
     </>

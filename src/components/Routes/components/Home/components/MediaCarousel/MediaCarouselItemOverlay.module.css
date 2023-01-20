@@ -1,0 +1,10 @@
+.MediaCarousel-item-overlay {
+  position: absolute;
+  inset: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  whitespace: normal;
+  padding: 0.25rem;
+  textalign: center;
+}

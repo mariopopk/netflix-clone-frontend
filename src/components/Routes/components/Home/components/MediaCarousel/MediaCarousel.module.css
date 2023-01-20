@@ -33,9 +33,15 @@
   align-items: center;
   transition: opacity 0.2s;
   border: 0;
-  cursor: pointer;
   display: none;
   justify-content: center;
+  opacity: 0;
+  cursor: default;
+}
+
+.MediaCarousel-button:not([disabled]) {
+  cursor: pointer;
+  opacity: inherit;
 }
 
 .MediaCarousel-button > * {
@@ -47,6 +53,9 @@
 .MediaCarousel .MediaCarousel-button:focus-within > * {
   opacity: 1;
 }
+
+/* .MediaCarousel-button:disabled {
+} */
 
 .MediaCarousel-button.left {
   background: linear-gradient(
@@ -64,38 +73,6 @@
     rgba(0, 0, 0, 0) 100%
   );
   right: 0;
-}
-
-.MediaCarousel-item {
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-}
-
-.MediaCarousel-item img {
-  border-radius: 0.25rem;
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-}
-
-.MediaCarousel-item:first-child {
-  margin-left: 2%;
-}
-
-.MediaCarousel-item:last-child {
-  margin-right: 2%;
-}
-
-.MediaCarousel-item-overlay {
-  position: absolute;
-  inset: 0px;
-  display: flex;
-  alignitems: center;
-  justifycontent: center;
-  whitespace: normal;
-  padding: 0.25rem;
-  textalign: center;
 }
 
 @media screen and (min-width: 768px) {

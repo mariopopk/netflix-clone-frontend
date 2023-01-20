@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import styles from "./MediaCarousel.module.css";
+import styles from "./MediaCarouselItemOverlay.module.css";
 
 export interface MediaCarouselItemOverlayProps {
   children: ReactNode;

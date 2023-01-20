@@ -1,0 +1,30 @@
+.MediaCarousel-item {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.MediaCarousel-item img {
+  border-radius: 0.25rem;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.MediaCarousel-item:first-child {
+  margin-left: 2%;
+}
+
+.MediaCarousel-item:last-child {
+  margin-right: 2%;
+}
+
+@media screen and (min-width: 768px) {
+  .MediaCarousel-item:first-child {
+    margin-left: 0%;
+  }
+
+  .MediaCarousel-item:last-child {
+    margin-right: 0%;
+  }
+}
