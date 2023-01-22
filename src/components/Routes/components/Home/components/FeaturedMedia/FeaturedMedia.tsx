@@ -1,53 +1,62 @@
-import { ApolloError } from "@apollo/client";
+import { ApolloError } from '@apollo/client'
 import {
   AspectRatioBox,
   Jumbotron,
   Card,
   Skeleton,
-} from "@mariopopk/react-lightning";
-import { CSSProperties } from "react";
-import { Show } from "../../../../../../apollo/types/Show/ShowQuery";
-import FeaturedMediaButtonGroup from "./FeaturedMediaButtonGroup";
-import FeaturedMediaText from "./FeaturedMediaText";
-import { FeaturedMediaTitle } from "./FeaturedMediaTitle";
+} from '@mariopopk/react-lightning'
+import { CSSProperties } from 'react'
+import { Show } from '../../../../../../apollo/types/Show/ShowQuery'
+
+import FeaturedMediaButtonGroup from './FeaturedMediaButtonGroup'
+import FeaturedMediaText from './FeaturedMediaText'
+import { FeaturedMediaTitle } from './FeaturedMediaTitle'
 
 interface FeaturedMediaProps {
-  style?: CSSProperties;
-  item?: Show;
-  loading?: boolean;
-  error?: ApolloError;
+  style?: CSSProperties
+  show?: Show
+  loading?: boolean
+  error?: ApolloError
+  showMediaText?: boolean
+  showMediaButtongroup?: boolean
+  innerWidth?: string
 }
 
 export function FeaturedMediaHorizontal({
   style,
-  item,
+  show,
   loading,
   error,
+  showMediaText = true,
+  showMediaButtongroup = true,
+  innerWidth,
 }: FeaturedMediaProps) {
   return (
     <div style={style}>
       <AspectRatioBox aspectRatio={{ w: 16, h: 7 }}>
-        {item && (
+        {show && (
           <Card
-            imageBackground={item?.images?.wideBanner}
-            style={{ width: "100%", height: "100%", borderWidth: "0" }}
+            imageBackground={show?.images?.wideBanner}
+            style={{ width: '100%', height: '100%', borderWidth: '0' }}
           >
-            <div style={{ padding: "0 4%", width: "100%", height: "100%" }}>
+            <div style={{ padding: '0 4%', width: '100%', height: '100%' }}>
               <Jumbotron
                 horizontalAlignment="left"
                 verticalAlignment="bottom"
-                innerWidth="35%"
+                innerWidth={innerWidth || '35%'}
               >
-                <div style={{ marginBottom: "12.5%" }}>
+                <div style={{ marginBottom: '12.5%' }}>
                   <FeaturedMediaTitle
-                    title={item?.name}
-                    titleImage={item?.images?.logo}
+                    title={show?.name}
+                    titleImage={show?.images?.logo}
                   />
-                  <FeaturedMediaText
-                    description={item?.description}
-                    keywords={item?.keywords}
-                  />
-                  <FeaturedMediaButtonGroup />
+                  {showMediaText && (
+                    <FeaturedMediaText
+                      description={show?.description}
+                      keywords={show?.keywords}
+                    />
+                  )}
+                  {showMediaButtongroup && <FeaturedMediaButtonGroup />}
                 </div>
               </Jumbotron>
             </div>
@@ -55,14 +64,14 @@ export function FeaturedMediaHorizontal({
         )}
         {loading && <Skeleton />}
 
-        {error && "Error"}
+        {error && 'Error'}
       </AspectRatioBox>
     </div>
-  );
+  )
 }
 
 export function FeaturedMediaVertical({
-  item,
+  show: item,
   loading,
   error,
 }: FeaturedMediaProps) {
@@ -74,9 +83,9 @@ export function FeaturedMediaVertical({
             <Card
               imageBackground={item?.images?.tallBanner}
               style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
+                width: '100%',
+                height: '100%',
+                display: 'flex',
                 border: 0,
                 borderRadius: 0,
               }}
@@ -84,12 +93,12 @@ export function FeaturedMediaVertical({
               <div
                 className="d-flex flex-column"
                 style={{
-                  flexWrap: "wrap",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop: "auto",
-                  padding: "7% 4%",
-                  width: "100%",
+                  flexWrap: 'wrap',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  marginTop: 'auto',
+                  padding: '7% 4%',
+                  width: '100%',
                 }}
               >
                 <FeaturedMediaTitle
@@ -106,9 +115,9 @@ export function FeaturedMediaVertical({
           )}
           {loading && <Skeleton />}
 
-          {error && "Error"}
+          {error && 'Error'}
         </AspectRatioBox>
       </div>
     </>
-  );
+  )
 }

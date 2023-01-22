@@ -1,17 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
 import ShowQuery from '../../../../../../../apollo/types/Show/ShowQuery'
-import ShowsQuery from '../../../../../../../apollo/types/Show/ShowsQuery'
-
-const getShows = gql`
-  query getShows {
-    shows(pagination: { pageSize: 50 }) {
-      data {
-        id
-      }
-    }
-  }
-`
 
 const getShow = gql`
   query getShow($id: ID!) {
@@ -101,38 +89,17 @@ const getShow = gql`
   }
 `
 
-export default function useGetFeaturedMedia() {
-  const [randomId, setRandomId] = useState<string | undefined>()
-
-  const {
-    data: showsData,
-    loading: showsLoading,
-    error: showsError,
-  } = useQuery<ShowsQuery>(getShows, {
-    skip: !!randomId,
-  })
-
-  const {
-    loading: showLoading,
-    error: showError,
-    data: showData,
-  } = useQuery<ShowQuery>(getShow, {
+export default function useGetShow(id: string | undefined) {
+  const { loading, error, data } = useQuery<ShowQuery>(getShow, {
     variables: {
-      id: randomId,
+      id,
     },
-    skip: !randomId,
+    skip: !id,
   })
-
-  useEffect(() => {
-    if (showsData?.shows?.data?.length) {
-      const randomIndex = Math.ceil(Math.random() * showsData.shows.data.length)
-      setRandomId(showsData.shows.data[randomIndex].id)
-    }
-  }, [showsData])
 
   return {
-    data: showData,
-    error: showsError || showError,
-    loading: showLoading || showsLoading,
+    data,
+    error,
+    loading,
   }
 }

@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Local Development with react-lightning
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+npm link @mariopopk/react-lightning
 
 ## Available Scripts
 
