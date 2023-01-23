@@ -3,6 +3,7 @@ import { Show } from '../../apollo/types/Show/ShowQuery'
 import { FeaturedMediaHorizontal } from '../Routes/components/Home/components/FeaturedMedia/FeaturedMedia'
 import { UilTimes } from '@iconscout/react-unicons'
 import ShowModalDetailsBar from './ShowModalDetailsBar'
+import styles from './ShowModal.module.css'
 
 interface ShowModalProps {
   show?: Show
@@ -22,48 +23,32 @@ export default function ShowModal({
       <Modal isOpen={open} onClose={() => handleClose?.()}>
         {loading && <Spinner />}
         {show && (
-          <div
-            style={{
-              maxHeight: '90vh',
-              minWidth: '100%',
-              maxWidth: '800px',
-              position: 'relative',
-            }}
-          >
-            <div>
-              <Button
-                onPress={() => handleClose?.()}
-                backgroundColor="dark"
-                color="light"
-                style={{
-                  padding: '0.25rem',
-                  position: 'absolute',
-                  zIndex: 1,
-                  right: '1%',
-                  top: '1%',
-                  borderRadius: '50%',
-                }}
-              >
-                <UilTimes />
-              </Button>
+          <div style={{ width: '920px', maxWidth: '100vw' }}>
+            <Button
+              onPress={() => handleClose?.()}
+              backgroundColor="dark"
+              color="light"
+              style={{
+                padding: '0.25rem',
+                position: 'absolute',
+                zIndex: 1,
+                right: '1%',
+                top: '1%',
+                borderRadius: '50%',
+              }}
+            >
+              <UilTimes />
+            </Button>
 
-              <FeaturedMediaHorizontal
-                innerWidth="50%"
-                show={show}
-                showMediaButtongroup={false}
-                showMediaText={false}
-              />
-            </div>
+            <FeaturedMediaHorizontal
+              innerWidth="50%"
+              show={show}
+              showMediaButtongroup={false}
+              showMediaText={false}
+            />
 
             <div style={{ margin: '1.5rem 2rem' }}>
-              <div
-                style={{
-                  display: 'grid',
-                  width: '100%',
-                  gridTemplateColumns: '2fr 1fr',
-                  columnGap: '1rem',
-                }}
-              >
+              <div className={styles.ShowModalColumns}>
                 <section>
                   <ShowModalDetailsBar
                     releaseYear={show?.releaseYear}
@@ -104,7 +89,7 @@ function ModalInfo({ title, data }: ModalInfoProps) {
   return (
     <>
       {data?.length ? (
-        <>
+        <div style={{ marginBottom: '0.75rem' }}>
           <Typography
             fontWeight="semibold"
             color="secondary"
@@ -114,7 +99,7 @@ function ModalInfo({ title, data }: ModalInfoProps) {
             {title}:{' '}
           </Typography>
           <ItemList list={data} />
-        </>
+        </div>
       ) : null}
     </>
   )

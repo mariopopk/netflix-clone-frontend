@@ -63,31 +63,37 @@ export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems
           return (
-            <Link
-              tabIndex={-1}
+            <MediaCarouselItem
               key={id}
-              to={'/browse/' + id}
-              state={{ background: location }}
-            >
-              <MediaCarouselItem
-                isFocusable={isFocusable}
-                style={{
-                  width: `${screenSize / currentInScreenItems}%`,
-                }}
-                tallChildren={
+              isFocusable={isFocusable}
+              style={{
+                width: `${screenSize / currentInScreenItems}%`,
+              }}
+              tallChildren={
+                <Link
+                  tabIndex={-1}
+                  to={'/browse/' + id}
+                  state={{ background: location }}
+                >
                   <MediaCarouselItemImage
                     alt={attributes?.name}
                     image={attributes?.images?.tallThumbnail}
                   />
-                }
-                wideChildren={
+                </Link>
+              }
+              wideChildren={
+                <Link
+                  tabIndex={-1}
+                  to={'/browse/' + id}
+                  state={{ background: location }}
+                >
                   <MediaCarouselItemImage
                     alt={attributes?.name}
                     image={attributes?.images?.wideThumbnail}
                   />
-                }
-              />
-            </Link>
+                </Link>
+              }
+            />
           )
         })}
 

@@ -29,7 +29,7 @@ export default function MediaCarouselItem({
     <div className={styles['MediaCarousel-item']} style={style}>
       <div className="d-none d-md-block" tabIndex={tabIndex}>
         <AspectRatioBox aspectRatio={horizontalAspectRatio}>
-          <div style={{ margin: '0.2rem', width: '100%', height: '100%' }}>
+          <div style={{ padding: '0.2rem', width: '100%', height: '100%' }}>
             {wideChildren}
           </div>
         </AspectRatioBox>
@@ -37,7 +37,7 @@ export default function MediaCarouselItem({
 
       <div className="d-block d-md-none " tabIndex={0}>
         <AspectRatioBox aspectRatio={verticalAspectRatio}>
-          <div style={{ margin: '0.2rem', width: '100%', height: '100%' }}>
+          <div style={{ padding: '0.2rem', width: '100%', height: '100%' }}>
             {tallChildren}
           </div>
         </AspectRatioBox>
