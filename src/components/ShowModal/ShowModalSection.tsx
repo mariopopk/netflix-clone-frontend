@@ -4,13 +4,14 @@ import ShowModal from './ShowModal'
 
 export default function ShowModalSection() {
   const { id } = useParams()
-  const { data } = useGetShow(id)
+  const { data, loading } = useGetShow(id)
   const navigate = useNavigate()
 
   return (
     <ShowModal
+      loading={loading}
       show={data?.show?.data?.attributes}
-      open={!!data?.show?.data?.attributes}
+      open={true}
       handleClose={() => {
         navigate(-1)
       }}

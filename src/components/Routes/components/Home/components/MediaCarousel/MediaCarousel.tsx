@@ -15,6 +15,7 @@ export interface MediaCarouselProps {
 }
 
 export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
+  const location = useLocation()
   const { width } = useWindowSize()
   const MediaCarouselRef = useRef<HTMLDivElement>(null)
 
@@ -62,7 +63,12 @@ export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems
           return (
-            <Link tabIndex={-1} key={id} to={'/browse/' + id}>
+            <Link
+              tabIndex={-1}
+              key={id}
+              to={'/browse/' + id}
+              state={{ background: location }}
+            >
               <MediaCarouselItem
                 isFocusable={isFocusable}
                 style={{

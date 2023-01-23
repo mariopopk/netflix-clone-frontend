@@ -1,4 +1,4 @@
-import { Typography, Modal, Button } from '@mariopopk/react-lightning'
+import { Typography, Modal, Button, Spinner } from '@mariopopk/react-lightning'
 import { Show } from '../../apollo/types/Show/ShowQuery'
 import { FeaturedMediaHorizontal } from '../Routes/components/Home/components/FeaturedMedia/FeaturedMedia'
 import { UilTimes } from '@iconscout/react-unicons'
@@ -8,79 +8,88 @@ interface ShowModalProps {
   show?: Show
   open: boolean
   handleClose?: () => void
+  loading: boolean
 }
 
-export default function ShowModal({ show, open, handleClose }: ShowModalProps) {
+export default function ShowModal({
+  show,
+  open,
+  handleClose,
+  loading,
+}: ShowModalProps) {
   return (
     <>
       <Modal isOpen={open} onClose={() => handleClose?.()}>
-        <div
-          style={{
-            maxHeight: '90vh',
-            minWidth: '100%',
-            maxWidth: '800px',
-            position: 'relative',
-          }}
-        >
-          <div>
-            <Button
-              onPress={() => handleClose?.()}
-              backgroundColor="dark"
-              color="light"
-              style={{
-                padding: '0.25rem',
-                position: 'absolute',
-                zIndex: 1,
-                right: '1%',
-                top: '1%',
-                borderRadius: '50%',
-              }}
-            >
-              <UilTimes />
-            </Button>
+        {loading && <Spinner />}
+        {show && (
+          <div
+            style={{
+              maxHeight: '90vh',
+              minWidth: '100%',
+              maxWidth: '800px',
+              position: 'relative',
+            }}
+          >
+            <div>
+              <Button
+                onPress={() => handleClose?.()}
+                backgroundColor="dark"
+                color="light"
+                style={{
+                  padding: '0.25rem',
+                  position: 'absolute',
+                  zIndex: 1,
+                  right: '1%',
+                  top: '1%',
+                  borderRadius: '50%',
+                }}
+              >
+                <UilTimes />
+              </Button>
 
-            <FeaturedMediaHorizontal
-              innerWidth="50%"
-              show={show}
-              showMediaButtongroup={false}
-              showMediaText={false}
-            />
-          </div>
+              <FeaturedMediaHorizontal
+                innerWidth="50%"
+                show={show}
+                showMediaButtongroup={false}
+                showMediaText={false}
+              />
+            </div>
 
-          <div style={{ margin: '1.5rem 2rem' }}>
-            <div
-              style={{
-                display: 'grid',
-                width: '100%',
-                gridTemplateColumns: '2fr 1fr',
-                columnGap: '1rem',
-              }}
-            >
-              <section>
-                <ShowModalDetailsBar
-                  releaseYear={show?.releaseYear}
-                  maturityLevel={show?.maturityLevel}
-                  subtitles={show?.subtitles}
-                  audio={show?.audio}
-                />
+            <div style={{ margin: '1.5rem 2rem' }}>
+              <div
+                style={{
+                  display: 'grid',
+                  width: '100%',
+                  gridTemplateColumns: '2fr 1fr',
+                  columnGap: '1rem',
+                }}
+              >
+                <section>
+                  <ShowModalDetailsBar
+                    releaseYear={show?.releaseYear}
+                    maturityLevel={show?.maturityLevel}
+                    subtitles={show?.subtitles}
+                    audio={show?.audio}
+                  />
 
-                {show?.description && (
-                  <Typography variant="base" fontWeight="normal">
-                    {show?.description}
-                  </Typography>
-                )}
+                  {show?.description && (
+                    <Typography variant="base" fontWeight="normal">
+                      {show?.description}
+                    </Typography>
+                  )}
 
-                <ModalInfo title="Cast" data={show?.cast?.data} />
-                <ModalInfo title="Audio" data={show?.audio?.data} />
-                <ModalInfo title="Subtitles" data={show?.subtitles?.data} />
-              </section>
-              <section>
-                <ModalInfo title="Starring" data={show?.starring?.data} />
-                <ModalInfo title="Genres" data={show?.genres?.data} />
-              </section>
+                  <ModalInfo title="Cast" data={show?.cast?.data} />
+                  <ModalInfo title="Audio" data={show?.audio?.data} />
+                  <ModalInfo title="Subtitles" data={show?.subtitles?.data} />
+                </section>
+                <section>
+                  <ModalInfo title="Starring" data={show?.starring?.data} />
+                  <ModalInfo title="Genres" data={show?.genres?.data} />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Modal>
     </>
   )
