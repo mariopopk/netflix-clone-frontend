@@ -1,33 +1,19 @@
 import { Typography, Modal, Button } from '@mariopopk/react-lightning'
-import { useEffect, useState } from 'react'
-import { Show } from '../../../../../../apollo/types/Show/ShowQuery'
-import { FeaturedMediaHorizontal } from '../FeaturedMedia/FeaturedMedia'
+import { Show } from '../../apollo/types/Show/ShowQuery'
+import { FeaturedMediaHorizontal } from '../Routes/components/Home/components/FeaturedMedia/FeaturedMedia'
 import { UilTimes } from '@iconscout/react-unicons'
 import ShowModalDetailsBar from './ShowModalDetailsBar'
 
 interface ShowModalProps {
   show?: Show
   open: boolean
+  handleClose?: () => void
 }
 
-export default function ShowModal({ show, open }: ShowModalProps) {
-  const [isOpen, setIsOpen] = useState(open)
-
-  useEffect(() => {
-    setIsOpen(open)
-  }, [open])
-
+export default function ShowModal({ show, open, handleClose }: ShowModalProps) {
   return (
     <>
-      <Button backgroundColor="light" size="lg" onPress={() => setIsOpen(true)}>
-        Modal
-      </Button>
-      <Modal
-        isOpen={isOpen}
-        onClose={() => {
-          setIsOpen(false)
-        }}
-      >
+      <Modal isOpen={open} onClose={() => handleClose?.()}>
         <div
           style={{
             maxHeight: '90vh',
@@ -38,7 +24,7 @@ export default function ShowModal({ show, open }: ShowModalProps) {
         >
           <div>
             <Button
-              onPress={() => setIsOpen(false)}
+              onPress={() => handleClose?.()}
               backgroundColor="dark"
               color="light"
               style={{
@@ -89,7 +75,7 @@ export default function ShowModal({ show, open }: ShowModalProps) {
                 <ModalInfo title="Subtitles" data={show?.subtitles?.data} />
               </section>
               <section>
-                <ModalInfo title="Cast" data={show?.starring?.data} />
+                <ModalInfo title="Starring" data={show?.starring?.data} />
                 <ModalInfo title="Genres" data={show?.genres?.data} />
               </section>
             </div>

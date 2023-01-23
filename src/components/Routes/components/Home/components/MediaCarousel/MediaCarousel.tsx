@@ -7,7 +7,7 @@ import useSlideMediaCarousel from './hooks/useSlideMediaCarousel'
 import MediaCarouselItem from './MediaCarouselItem'
 import ShowsQuery from '../../../../../../apollo/types/Show/ShowsQuery'
 import MediaCarouselItemImage from './MediaCarouselItemImage'
-import ShowModalSection from '../ShowModal/ShowModalSection'
+import { Link, useLocation } from 'react-router-dom'
 
 export interface MediaCarouselProps {
   shows?: ShowsQuery['shows']
@@ -62,25 +62,26 @@ export default function MediaCarousel({ shows, loading }: MediaCarouselProps) {
           const isFocusable =
             i >= currentItem && i < currentItem + currentInScreenItems
           return (
-            <MediaCarouselItem
-              isFocusable={isFocusable}
-              key={id}
-              style={{
-                width: `${screenSize / currentInScreenItems}%`,
-              }}
-              tallChildren={
-                <MediaCarouselItemImage
-                  alt={attributes?.name}
-                  image={attributes?.images?.tallThumbnail}
-                />
-              }
-              wideChildren={
-                <MediaCarouselItemImage
-                  alt={attributes?.name}
-                  image={attributes?.images?.wideThumbnail}
-                />
-              }
-            />
+            <Link tabIndex={-1} key={id} to={'/browse/' + id}>
+              <MediaCarouselItem
+                isFocusable={isFocusable}
+                style={{
+                  width: `${screenSize / currentInScreenItems}%`,
+                }}
+                tallChildren={
+                  <MediaCarouselItemImage
+                    alt={attributes?.name}
+                    image={attributes?.images?.tallThumbnail}
+                  />
+                }
+                wideChildren={
+                  <MediaCarouselItemImage
+                    alt={attributes?.name}
+                    image={attributes?.images?.wideThumbnail}
+                  />
+                }
+              />
+            </Link>
           )
         })}
 

@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import ShowQuery from '../../../../../../../apollo/types/Show/ShowQuery'
+import ShowQuery from '../../../apollo/types/Show/ShowQuery'
 
 const getShow = gql`
   query getShow($id: ID!) {

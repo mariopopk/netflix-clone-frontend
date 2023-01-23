@@ -1,5 +1,5 @@
 import { Typography, Stack } from '@mariopopk/react-lightning'
-import { Show } from '../../../../../../apollo/types/Show/ShowQuery'
+import { Show } from '../../apollo/types/Show/ShowQuery'
 import {
   UilClosedCaptioning,
   UilCommentMessage,
